@@ -1,0 +1,856 @@
+:root {
+    --bg: #fefdf8;
+    --text: #1e1e1e;
+    --primary: #0e6b3e;
+    --primary-dark: #094d2c;
+    --primary-light: #e6f4ec;
+    --gold: #b68b40;
+    --gold-dark: #8a652e;
+    --gold-light: #fdf3e0;
+    --card-bg: #ffffff;
+    --border: #e0d5c1;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+    --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --font-main: 'Noto Naskh Arabic', 'Amiri', 'Scheherazade New', serif;
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg: #1a1a1a;
+    --text: #e0d5c1;
+    --primary: #2e9a5c;
+    --primary-dark: #1f6e3f;
+    --primary-light: #1e3a2a;
+    --gold: #d4a84b;
+    --gold-dark: #a07828;
+    --gold-light: #3a2e1a;
+    --card-bg: #252525;
+    --border: #444;
+    --shadow: 0 2px 16px rgba(0,0,0,0.3);
+    --shadow-hover: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* ========== إعادة الضبط والأساسيات ========== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 2;
+    transition: background var(--transition-speed), color var(--transition-speed);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+}
+
+/* ========== الهيدر (ثابت دائماً أعلى الصفحة) ========== */
+header {
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 3px solid var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    transition: background var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* تعويض ارتفاع الهيدر الثابت حتى لا يغطي بداية المحتوى (يُضبط الرقم تلقائياً عبر script.js) */
+body {
+    padding-top: var(--header-height, 80px);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.4rem;
+    transition: opacity 0.2s;
+}
+
+header .logo:hover {
+    opacity: 0.85;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+}
+
+nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+nav a.active {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.theme-toggle {
+    background: var(--primary-light);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+/* ========== قسم البطل (الصفحة الرئيسية) ========== */
+.hero {
+    text-align: center;
+    padding: 2rem 0 3rem;
+}
+
+.bismillah {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-family: 'Scheherazade New', serif;
+    letter-spacing: 2px;
+}
+
+.hero-logo {
+    margin: 1.5rem 0;
+}
+
+.logo-img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* ========== صندوق الحديث الشريف ========== */
+.hadith-container {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem 2rem;
+    margin: 2rem 0;
+    border-right: 8px solid var(--gold);
+    text-align: right;
+}
+
+.hadith-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+}
+
+.radiallah {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.salla {
+    font-size: 1.3rem;
+    color: var(--gold);
+}
+
+.hadith-quote {
+    background: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 2rem 1.8rem;
+    margin: 1.5rem 0;
+    border: 2px dashed var(--primary);
+}
+
+.hadith-quote p {
+    font-size: 1.35rem;
+    line-height: 2.4;
+    font-weight: 500;
+    word-spacing: 4px;
+}
+
+.hadith-question {
+    color: var(--primary-dark);
+    font-weight: bold;
+    margin-top: 1.5rem;
+}
+
+.hadith-answer {
+    color: var(--primary);
+    font-size: 1.5rem !important;
+    margin-top: 0.8rem;
+}
+
+.hadith-answer strong {
+    color: var(--primary);
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 2px;
+}
+
+.hadith-takhreej {
+    background: var(--gold-light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--gold);
+}
+
+.hadith-takhreej p {
+    margin-bottom: 0.5rem;
+}
+
+/* ========== وصف البطل ========== */
+.hero-description {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 2.2;
+}
+
+.hero-description strong {
+    color: var(--primary);
+}
+
+/* ========== الأزرار ========== */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 107, 62, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+/* ========== بطاقات المميزات والفِرق ========== */
+.features {
+    margin-top: 3rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.8rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem 1.8rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.card a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: auto;
+    transition: color 0.2s;
+}
+
+.card a:hover {
+    color: var(--gold-dark);
+    text-decoration: underline;
+}
+
+/* ========== تنسيق الفروع المتشعبة ========== */
+.branch {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--gold-dark);
+    font-style: italic;
+    background: var(--gold-light);
+    padding: 5px 12px;
+    border-radius: 15px;
+    line-height: 1.8;
+}
+
+/* ========== عناوين أقسام الفرق ========== */
+.firaq-section-title {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 0.5rem;
+    margin: 2.5rem 0 1rem;
+}
+
+.firaq-origin {
+    background: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-right: 4px solid var(--primary);
+    font-size: 0.95rem;
+}
+
+/* ========== صفحات المحتوى والمقالات ========== */
+article {
+    line-height: 2.1;
+}
+
+article h1 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 0.8rem;
+}
+
+article h2 {
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    margin: 2.5rem 0 1.2rem;
+}
+
+article h3 {
+    color: var(--gold-dark);
+    font-size: 1.2rem;
+    margin: 1.8rem 0 0.8rem;
+}
+
+article p {
+    margin-bottom: 1.2rem;
+}
+
+article strong {
+    color: var(--primary);
+}
+
+article ul, article ol {
+    margin-right: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+article li {
+    margin-bottom: 0.7rem;
+    padding-right: 0.5rem;
+}
+
+/* ========== صناديق المصادر والتحذيرات ========== */
+.source-box {
+    background: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid var(--primary);
+}
+
+.source-box h4 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-right: 5px solid #d4a017;
+}
+
+[data-theme="dark"] .warning-box {
+    background: #3a2e0a;
+    border-right-color: #d4a017;
+    color: #e0d5c1;
+}
+
+.warning-box h4 {
+    color: #8a652e;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+[data-theme="dark"] .warning-box h4 {
+    color: #d4a84b;
+}
+
+/* ========== جدول المقارنة ========== */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.comparison-table thead th {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 14px 12px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid var(--primary-dark);
+}
+
+.comparison-table tbody td {
+    border: 1px solid var(--border);
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background: var(--primary-light);
+}
+
+.comparison-table tbody tr:hover {
+    background: var(--gold-light);
+}
+
+.comparison-table tbody td:first-child {
+    text-align: right;
+    font-weight: bold;
+    background: var(--card-bg);
+}
+
+/* ========== الفوتر ========== */
+footer {
+    background: var(--card-bg);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--primary);
+    font-size: 0.95rem;
+    transition: background var(--transition-speed);
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ========== صفحة 404 ========== */
+.error-page {
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+.error-page h1 {
+    font-size: 6rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.error-page p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* ========== تحسينات عامة ========== */
+::selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+a {
+    color: var(--primary);
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+blockquote {
+    border-right: 4px solid var(--gold);
+    padding-right: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--text);
+    font-style: italic;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--border);
+    margin: 2rem 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ========== شريط التمرير ========== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* ========== الأزرار العائمة (رجوع + تمرير) ========== */
+.fn-float-btn {
+    position: fixed;
+    bottom: 22px;
+    z-index: 500;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-hover);
+    transition: transform 0.2s, opacity 0.2s, background 0.2s;
+}
+
+.fn-back-btn {
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.fn-back-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.fn-back-btn span[aria-hidden] {
+    font-size: 1.1rem;
+    transform: scaleX(-1);
+    display: inline-block;
+}
+
+.fn-scroll-btn {
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}
+
+.fn-scroll-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.fn-scroll-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 480px) {
+    .fn-back-btn .fn-float-label {
+        display: none;
+    }
+
+    .fn-back-btn {
+        padding: 10px 14px;
+    }
+
+    .fn-float-btn {
+        bottom: 14px;
+    }
+
+    .fn-back-btn {
+        left: 12px;
+    }
+
+    .fn-scroll-btn {
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* ========== ميديا كويري للجوال ========== */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    header .logo {
+        font-size: 1.2rem;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 4px;
+    }
+
+    nav a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+
+    .hadith-container {
+        padding: 1.5rem 1rem;
+        border-right-width: 5px;
+    }
+
+    .hadith-quote {
+        padding: 1.2rem 1rem;
+    }
+
+    .hadith-quote p {
+        font-size: 1.15rem;
+        line-height: 2;
+    }
+
+    .hadith-answer {
+        font-size: 1.3rem !important;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .comparison-table {
+        font-size: 0.75rem;
+    }
+
+    .comparison-table thead th,
+    .comparison-table tbody td {
+        padding: 8px 6px;
+    }
+
+    article h1 {
+        font-size: 1.8rem;
+    }
+
+    article h2 {
+        font-size: 1.4rem;
+    }
+
+    .bismillah {
+        font-size: 2rem;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    nav a {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .hadith-quote p {
+        font-size: 1.05rem;
+        word-spacing: 2px;
+    }
+
+    .logo-img {
+        max-width: 120px;
+    }
+}
+
+/* ========== دعم الطباعة ========== */
+@media print {
+    header, footer, .theme-toggle, .buttons, nav, .fn-float-btn {
+        display: none;
+    }
+
+    body {
+        background: #ffffff;
+        color: #000000;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .hadith-container, .card, .source-box, .warning-box {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+
+    a {
+        color: #000000;
+        text-decoration: underline;
+    }
+}

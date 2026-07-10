@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - الصفحة غير موجودة | الفرقة الناجية</title>
+    <!--
+        هذه الصفحة مستقلة بذاتها (بلا اعتماد على style.css أو script.js أو assets/logo.png)
+        لأن استضافات مثل GitHub Pages تعرض 404.html هذا لأي مسار غير موجود، بينما يبقى
+        شريط عنوان المتصفح على المسار الوهيمي العميق. أي رابط أو مورد نسبي هنا سينكسر،
+        لذلك اعتمدنا أنماطاً مضمّنة ورابط عودة يُحسب بجافاسكربت وقت التحميل.
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fefdf8;
+            --text: #1e1e1e;
+            --primary: #0e6b3e;
+            --primary-dark: #094d2c;
+            --primary-light: #e6f4ec;
+            --gold: #b68b40;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --text: #e0d5c1;
+                --primary: #2e9a5c;
+                --primary-dark: #1f6e3f;
+                --primary-light: #1e3a2a;
+                --gold: #d4a84b;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 18px; }
+        body {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+        .error-page { max-width: 480px; }
+        .error-icon { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        h1 {
+            font-size: 5rem;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 480px) {
+            html { font-size: 16px; }
+            h1 { font-size: 3.5rem; }
+            p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="error-page">
+        <div class="error-icon">🕌</div>
+        <h1>٤٠٤</h1>
+        <p>الصفحة التي تبحث عنها غير موجودة أو نُقلت.</p>
+        <a id="fn-home-link" href="/" class="btn">العودة للرئيسية</a>
+    </main>
+    <script>
+        (function () {
+            // نحسب رابط الرئيسية بالاعتماد على مسار المستودع إن وُجد في العنوان
+            // (استضافة GitHub Pages كمشروع فرعي)، وإلا نعود لجذر النطاق مباشرة.
+            var path = window.location.pathname;
+            var marker = '/Firqah-Najiyah/';
+            var idx = path.indexOf(marker);
+            var home = idx !== -1 ? path.slice(0, idx + marker.length) : '/';
+            document.getElementById('fn-home-link').setAttribute('href', home);
+        })();
+    </script>
+</body>
+</html>
