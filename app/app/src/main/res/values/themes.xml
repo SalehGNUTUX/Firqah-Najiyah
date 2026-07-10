@@ -1,0 +1,12 @@
+<resources>
+    <!--
+        ثيم إقلاع بسيط قبل تحميل Compose (بلا AppCompat؛ MainActivity يرث
+        ComponentActivity مباشرة). الألوان الفعلية تُدار بالكامل داخل
+        NajiyahTheme (Compose)؛ هذا فقط لخلفية النافذة قبل أول رسم.
+    -->
+    <style name="Theme.Najiyah" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#FEFDF8</item>
+        <item name="android:statusBarColor">#FEFDF8</item>
+        <item name="android:navigationBarColor">#FEFDF8</item>
+    </style>
+</resources>

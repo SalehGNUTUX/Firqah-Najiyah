@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">الفرقة الناجية</string>
+
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_najiyah">الفرقة الناجية</string>
+    <string name="nav_encyclopedia">الفرق الضالة</string>
+    <string name="nav_manhaj">منهج النجاة</string>
+    <string name="nav_sources">المصادر</string>
+    <string name="nav_about">من نحن</string>
+    <string name="nav_search">بحث</string>
+
+    <string name="home_read_more">اقرأ المزيد</string>
+    <string name="encyclopedia_title">موسوعة الفرق الضالة</string>
+    <string name="search_hint">ابحث في الموسوعة…</string>
+    <string name="search_empty">لا نتائج مطابقة</string>
+
+    <string name="content_update_available">تتوفر نسخة أحدث من المحتوى</string>
+    <string name="content_update_action">تحديث الآن</string>
+    <string name="content_update_done">تم تحديث المحتوى</string>
+    <string name="content_offline_notice">يعمل التطبيق حالياً بالمحتوى المحلي (بلا إنترنت)</string>
+
+    <string name="action_share">مشاركة</string>
+    <string name="action_back">رجوع</string>
+    <string name="action_dark_mode">الوضع الليلي</string>
+    <string name="action_light_mode">الوضع النهاري</string>
+</resources>

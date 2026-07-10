@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "files": [
+    "home.json",
+    "najiyah.json",
+    "manhaj.json",
+    "sources.json",
+    "about.json",
+    "sects/index.json",
+    "sects/ashairah.json",
+    "sects/shia.json",
+    "sects/druze.json"
+  ]
+}
