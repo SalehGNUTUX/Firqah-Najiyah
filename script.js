@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 headerDiv.innerHTML = data;
                 attachThemeToggle();
+                initNavToggle();
                 fixHeaderLinks();
                 highlightCurrentPage();
                 syncHeaderHeight();
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <img src="${BASE_PATH}assets/logo.png" alt="شعار الفرقة الناجية" class="logo-icon" onerror="this.style.display='none'">
                         <span>الفرقة الناجية</span>
                     </a>
-                    <nav>
+                    <nav id="main-nav">
                         <a href="${BASE_PATH}index.html">الرئيسية</a>
                         <a href="${BASE_PATH}pages/al-firqah-an-najiyah.html">الفرقة الناجية</a>
                         <a href="${BASE_PATH}pages/firaq/">الفرق الضالة</a>
@@ -40,9 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="${BASE_PATH}pages/sources.html">المصادر</a>
                         <a href="${BASE_PATH}pages/about.html">من نحن</a>
                     </nav>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي">🌙</button>
+                    <div class="header-actions">
+                        <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي">🌙</button>
+                        <button id="nav-toggle" class="nav-toggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+                    </div>
                 </header>`;
                 attachThemeToggle();
+                initNavToggle();
                 highlightCurrentPage();
                 syncHeaderHeight();
             });
@@ -108,9 +113,47 @@ function attachThemeToggle() {
 
 function updateThemeButtonText(theme) {
     const btn = document.getElementById('theme-toggle');
-    if (btn) {
-        btn.textContent = theme === 'dark' ? '☀️ الوضع النهاري' : '🌙 الوضع الليلي';
+    if (!btn) return;
+    // الأيقونة تبقى ظاهرة دوماً، والنص يُخفى على الجوال (media query) للحفاظ
+    // على زرّ مضغوط في صفّ الهيدر الواحد.
+    const icon = theme === 'dark' ? '☀️' : '🌙';
+    const label = theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي';
+    btn.innerHTML = `<span class="theme-icon">${icon}</span><span class="theme-label"> ${label}</span>`;
+}
+
+// ========== قائمة الجوال (زر الهامبرغر) ==========
+// على الشاشات الصغيرة تختفي روابط التنقّل خلف زر ☰ لتفادي أخذ الهيدر
+// الثابت مساحة كبيرة من الشاشة؛ القائمة تنسدل فوق المحتوى (position:
+// absolute) فلا تغيّر ارتفاع الهيدر نفسه ولا تُحرِّك المحتوى تحته.
+function initNavToggle() {
+    const toggleBtn = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    if (!toggleBtn || !nav) return;
+
+    function closeMenu() {
+        nav.classList.remove('nav-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
     }
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = nav.classList.toggle('nav-open');
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (nav.classList.contains('nav-open') && !nav.contains(e.target) && e.target !== toggleBtn) {
+            closeMenu();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) closeMenu();
+    });
 }
 
 // ========== تصحيح روابط وشعار الهيدر بعد التحميل ==========

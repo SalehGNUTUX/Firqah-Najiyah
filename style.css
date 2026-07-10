@@ -155,6 +155,34 @@ nav a.active {
     color: #ffffff;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* زر القائمة (الهامبرغر) — مخفي على الحاسوب، يظهر فقط على الجوال */
+.nav-toggle {
+    display: none;
+    background: var(--primary-light);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nav-toggle:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
 /* ========== قسم البطل (الصفحة الرئيسية) ========== */
 .hero {
     text-align: center;
@@ -796,29 +824,85 @@ img {
         font-size: 16px;
     }
 
+    /*
+        على الجوال: صفّ واحد مضغوط (الشعار + زرّا الوضع الليلي والقائمة)،
+        وتُخفى روابط التنقّل خلف القائمة المنسدلة كي لا يحتلّ الهيدر الثابت
+        مساحة كبيرة من الشاشة قبل بداية المحتوى.
+    */
     header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.6rem 1rem;
+        position: relative;
     }
 
     header .logo {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    header .logo span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .logo-icon {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
     }
 
-    nav {
+    .header-actions {
+        flex-shrink: 0;
+    }
+
+    .theme-toggle {
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        gap: 4px;
+    }
+
+    .theme-toggle .theme-label {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* القائمة المنسدلة: absolute حتى لا تُغيّر ارتفاع الهيدر نفسه */
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--card-bg);
+        padding: 0.6rem;
+        border-bottom: 3px solid var(--primary);
+        box-shadow: var(--shadow);
+    }
+
+    nav.nav-open {
+        display: flex;
     }
 
     nav a {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        text-align: center;
+        border-radius: var(--radius-sm);
     }
 
     .container {
