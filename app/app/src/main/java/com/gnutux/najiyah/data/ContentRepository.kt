@@ -174,12 +174,7 @@ class ContentRepository(private val context: Context) {
         icon = json.getString("icon"),
         classification = json.getString("classification"),
         sections = json.getJSONArray("sections").toSectionList(),
-        sources = json.getJSONArray("sources").let { arr ->
-            (0 until arr.length()).map { i ->
-                val s = arr.getJSONObject(i)
-                SourceRef(s.getString("label"), s.optString("url").ifBlank { null })
-            }
-        },
+        sources = json.getJSONArray("sources").toSourceRefList(),
     )
 
     private fun JSONArray.toSectionList(): List<ContentSection> =
@@ -197,7 +192,14 @@ class ContentRepository(private val context: Context) {
                         },
                     )
                 },
+                links = s.optJSONArray("links")?.toSourceRefList() ?: emptyList(),
             )
+        }
+
+    private fun JSONArray.toSourceRefList(): List<SourceRef> =
+        (0 until length()).map { i ->
+            val s = getJSONObject(i)
+            SourceRef(s.getString("label"), s.optString("url").ifBlank { null })
         }
 
     private fun JSONArray.toStringList(): List<String> = (0 until length()).map { getString(it) }

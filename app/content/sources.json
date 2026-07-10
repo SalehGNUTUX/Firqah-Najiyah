@@ -31,13 +31,13 @@
     {
       "heading": "🌐 مواقع إلكترونية موثوقة",
       "paragraphs": [],
-      "items": [
-        "islamqa.info — موقع الإسلام سؤال وجواب (الشيخ محمد صالح المنجد)",
-        "dorar.net — الموسوعة الحديثية (الدرر السنية)",
-        "binbaz.org.sa — فتاوى الشيخ عبد العزيز بن باز",
-        "alathar.net — شبكة الأثر (علماء وفقهاء)",
-        "alssunnah.org — موقع أهل السنة والجماعة",
-        "ajurry.com — مكتبة الآجري (مصادر سلفية)"
+      "links": [
+        { "label": "islamqa.info — موقع الإسلام سؤال وجواب (الشيخ محمد صالح المنجد)", "url": "https://islamqa.info/ar" },
+        { "label": "dorar.net — الموسوعة الحديثية (الدرر السنية)", "url": "https://dorar.net" },
+        { "label": "binbaz.org.sa — فتاوى الشيخ عبد العزيز بن باز", "url": "https://binbaz.org.sa" },
+        { "label": "alathar.net — شبكة الأثر (علماء وفقهاء)", "url": "https://alathar.net" },
+        { "label": "alssunnah.org — موقع أهل السنة والجماعة", "url": "https://www.alssunnah.org" },
+        { "label": "ajurry.com — مكتبة الآجري (مصادر سلفية)", "url": "https://www.ajurry.com" }
       ]
     },
     {

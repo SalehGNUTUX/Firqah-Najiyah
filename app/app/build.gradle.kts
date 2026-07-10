@@ -12,6 +12,12 @@ val keystoreProps = Properties().apply {
     if (keystorePropsFile.exists()) keystorePropsFile.inputStream().use { load(it) }
 }
 
+// اسم ملف الحزمة الناتجة يطابق اسم المشروع (Firqah-Najiyah) بدل الاسم
+// الافتراضي المشتق من اسم الوحدة "app" (app-debug.apk).
+base {
+    archivesName.set("Firqah-Najiyah")
+}
+
 android {
     namespace = "com.gnutux.najiyah"
     compileSdk = 36

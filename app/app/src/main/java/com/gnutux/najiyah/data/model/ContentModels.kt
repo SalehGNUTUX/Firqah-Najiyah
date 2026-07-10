@@ -21,6 +21,7 @@ data class ContentSection(
     val paragraphs: List<String> = emptyList(),
     val items: List<String> = emptyList(),
     val table: ContentTable? = null,
+    val links: List<SourceRef> = emptyList(),
 )
 
 data class ContentTable(
