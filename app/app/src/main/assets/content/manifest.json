@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "files": [
     "home.json",
     "najiyah.json",
@@ -9,6 +9,21 @@
     "sects/index.json",
     "sects/ashairah.json",
     "sects/shia.json",
-    "sects/druze.json"
+    "sects/druze.json",
+    "sects/ahmadiyyah.json",
+    "sects/nusayriyyah.json",
+    "sects/bahaiyyah.json",
+    "sects/ismailiyyah.json",
+    "sects/zaydiyyah.json",
+    "sects/ibadiyyah.json",
+    "sects/azariqah.json",
+    "sects/jahmiyyah.json",
+    "sects/mutazilah.json",
+    "sects/sufiyyah.json",
+    "sects/islamic-groups.json",
+    "sects/deobandiyyah.json",
+    "sects/quraniyyun.json",
+    "sects/ilmaniyyah.json",
+    "sects/tabligh.json"
   ]
 }
