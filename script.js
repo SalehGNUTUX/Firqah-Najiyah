@@ -268,15 +268,15 @@ function toggleShareMenu(anchorBtn) {
         <a href="https://wa.me/?text=${encodedMessage}" target="_blank" rel="noopener">📱 واتساب</a>
         <a href="https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(SHARE_TEXT)}" target="_blank" rel="noopener">✈️ تيليجرام</a>
         <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodedUrl}" target="_blank" rel="noopener">🐦 إكس (تويتر)</a>
-        <button type="button" id="fn-share-copy">📋 نسخ الرابط</button>
+        <button type="button" id="fn-share-copy">📋 نسخ النص والرابط</button>
     `;
     document.body.appendChild(menu);
 
     document.getElementById('fn-share-copy').addEventListener('click', (e) => {
         e.stopPropagation();
-        navigator.clipboard.writeText(SHARE_SITE_URL).then(() => {
+        navigator.clipboard.writeText(fullMessage).then(() => {
             const copyBtn = document.getElementById('fn-share-copy');
-            if (copyBtn) copyBtn.textContent = '✅ تم النسخ';
+            if (copyBtn) copyBtn.textContent = '✅ تم نسخ النص والرابط';
         });
     });
 
