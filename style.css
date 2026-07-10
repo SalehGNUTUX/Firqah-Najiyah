@@ -745,9 +745,8 @@ img {
 }
 
 .fn-share-menu {
+    /* bottom/right تُضبَط ديناميكياً عبر script.js لتلتصق بالزر الذي فتحها */
     position: fixed;
-    bottom: 130px;
-    right: 18px;
     z-index: 501;
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -830,13 +829,17 @@ img {
         مساحة كبيرة من الشاشة قبل بداية المحتوى.
     */
     header {
+        /* يبقى position: fixed من القاعدة الأساسية (ثابت أعلى الشاشة أثناء
+           التمرير) — وهو أيضاً سياق تموضع كافٍ لعنصر nav المطلق (absolute)
+           أدناه، فلا حاجة لتغييره هنا؛ كتابته "relative" هنا سابقاً كانت
+           تكسر الثبات وتُحدث فراغاً مضاعفاً (padding-top محجوز + الهيدر
+           في التدفّق الطبيعي). */
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
         gap: 0.6rem;
         padding: 0.6rem 1rem;
-        position: relative;
     }
 
     header .logo {

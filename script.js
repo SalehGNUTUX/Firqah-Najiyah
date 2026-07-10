@@ -273,6 +273,13 @@ const SHARE_TEXT = '📖 موقع "الفرقة الناجية": تعريفٌ ب
     '💻 المستودع (مفتوح المصدر): ' + SHARE_REPO_URL + '\n\n' +
     '#الفرقة_الناجية #أهل_السنة_والجماعة #عقيدة_صحيحة #GNUTUX';
 
+// نستخدم إمكانية اللمس (لا navigator.share وحدها) لتمييز الجوال عن الحاسوب،
+// لأن بعض متصفحات الحاسوب (خصوصاً على ويندوز) تملك navigator.share فعلياً
+// لكن سلوكها أو ظهورها لا يناسب تجربة الحاسوب المطلوبة هنا.
+function isTouchDevice() {
+    return window.matchMedia('(pointer: coarse)').matches;
+}
+
 function initShareButton() {
     if (document.getElementById('fn-share-btn')) return;
 
@@ -285,11 +292,18 @@ function initShareButton() {
     document.body.appendChild(btn);
 
     btn.addEventListener('click', () => {
-        if (navigator.share) {
-            navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: SHARE_SITE_URL }).catch(() => {});
-        } else {
-            toggleShareMenu(btn);
+        // الجوال: مشاركة أصلية عبر نظام التشغيل (أفضل تجربة ممكنة).
+        if (isTouchDevice() && navigator.share) {
+            try {
+                navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: SHARE_SITE_URL })
+                    .catch(() => toggleShareMenu(btn));
+            } catch (e) {
+                toggleShareMenu(btn);
+            }
+            return;
         }
+        // الحاسوب: قائمة مرتبطة بالزر مباشرة، وأولويتها نسخ الرابط.
+        toggleShareMenu(btn);
     });
 }
 
@@ -307,13 +321,21 @@ function toggleShareMenu(anchorBtn) {
     const menu = document.createElement('div');
     menu.id = 'fn-share-menu';
     menu.className = 'fn-share-menu';
+    // نسخ الرابط أولاً (الفعل الأكثر فائدة على الحاسوب)، ثم شبكات المشاركة.
     menu.innerHTML = `
+        <button type="button" id="fn-share-copy">📋 نسخ النص والرابط</button>
         <a href="https://wa.me/?text=${encodedMessage}" target="_blank" rel="noopener">📱 واتساب</a>
         <a href="https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(SHARE_TEXT)}" target="_blank" rel="noopener">✈️ تيليجرام</a>
         <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodedUrl}" target="_blank" rel="noopener">🐦 إكس (تويتر)</a>
-        <button type="button" id="fn-share-copy">📋 نسخ النص والرابط</button>
     `;
     document.body.appendChild(menu);
+
+    // تثبيت القائمة فوق الزر مباشرة (بدل موضع ثابت مسبقاً)، فتبدو مرتبطة
+    // به بصرياً على أي حجم شاشة — مهم خصوصاً على الحاسوب حيث لا تُخفي
+    // القائمة الزرّ نفسه بخلاف الجوال.
+    const rect = anchorBtn.getBoundingClientRect();
+    menu.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
 
     document.getElementById('fn-share-copy').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -328,6 +350,12 @@ function toggleShareMenu(anchorBtn) {
             if (!menu.contains(e.target) && e.target !== anchorBtn) {
                 menu.remove();
                 document.removeEventListener('click', closeMenu);
+            }
+        });
+        document.addEventListener('keydown', function closeOnEsc(e) {
+            if (e.key === 'Escape') {
+                menu.remove();
+                document.removeEventListener('keydown', closeOnEsc);
             }
         });
     }, 0);
