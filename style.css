@@ -308,6 +308,17 @@ nav a.active {
     color: var(--primary-dark);
 }
 
+.btn-download {
+    background: var(--gold);
+    color: #ffffff;
+}
+
+.btn-download:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(182, 139, 64, 0.35);
+}
+
 /* ========== بطاقات المميزات والفِرق ========== */
 .features {
     margin-top: 3rem;
