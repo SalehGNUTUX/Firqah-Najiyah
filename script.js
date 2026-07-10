@@ -269,7 +269,7 @@ function initScrollFloatButton() {
 const SHARE_SITE_URL = 'https://salehgnutux.github.io/Firqah-Najiyah/index.html';
 const SHARE_REPO_URL = 'https://github.com/SalehGNUTUX/Firqah-Najiyah';
 const SHARE_TITLE = 'الفرقة الناجية';
-const SHARE_TEXT = '📖 موقع "الفرقة الناجية": تعريفٌ بعقيدة أهل السنة والجماعة، وموسوعة شاملة لأكثر من 19 فرقة ضالة مع الردّ العقدي عليها من الكتاب والسنة.\n' +
+const SHARE_TEXT = '📖 موقع "الفرقة الناجية": تعريفٌ بعقيدة أهل السنة والجماعة، وموسوعة شاملة لـ18 فرقة ضالة مع الردّ العقدي عليها من الكتاب والسنة.\n' +
     '💻 المستودع (مفتوح المصدر): ' + SHARE_REPO_URL + '\n\n' +
     '#الفرقة_الناجية #أهل_السنة_والجماعة #عقيدة_صحيحة #GNUTUX';
 
