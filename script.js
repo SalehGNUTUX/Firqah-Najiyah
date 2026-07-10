@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initBackButton();
     initScrollFloatButton();
+    initShareButton();
 
     window.addEventListener('resize', syncHeaderHeight);
     window.addEventListener('load', syncHeaderHeight);
@@ -219,4 +220,72 @@ function initScrollFloatButton() {
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
+}
+
+// ========== زر مشاركة الموقع ==========
+const SHARE_SITE_URL = 'https://salehgnutux.github.io/Firqah-Najiyah/index.html';
+const SHARE_REPO_URL = 'https://github.com/SalehGNUTUX/Firqah-Najiyah';
+const SHARE_TITLE = 'الفرقة الناجية';
+const SHARE_TEXT = '📖 موقع "الفرقة الناجية": تعريفٌ بعقيدة أهل السنة والجماعة، وموسوعة شاملة لأكثر من 19 فرقة ضالة مع الردّ العقدي عليها من الكتاب والسنة.\n' +
+    '💻 المستودع (مفتوح المصدر): ' + SHARE_REPO_URL + '\n\n' +
+    '#الفرقة_الناجية #أهل_السنة_والجماعة #عقيدة_صحيحة #GNUTUX';
+
+function initShareButton() {
+    if (document.getElementById('fn-share-btn')) return;
+
+    const btn = document.createElement('button');
+    btn.id = 'fn-share-btn';
+    btn.className = 'fn-float-btn fn-share-btn';
+    btn.type = 'button';
+    btn.innerHTML = '🔗';
+    btn.setAttribute('aria-label', 'مشاركة الموقع');
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+        if (navigator.share) {
+            navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: SHARE_SITE_URL }).catch(() => {});
+        } else {
+            toggleShareMenu(btn);
+        }
+    });
+}
+
+function toggleShareMenu(anchorBtn) {
+    const existing = document.getElementById('fn-share-menu');
+    if (existing) {
+        existing.remove();
+        return;
+    }
+
+    const fullMessage = SHARE_TEXT + '\n🔗 الموقع: ' + SHARE_SITE_URL;
+    const encodedMessage = encodeURIComponent(fullMessage);
+    const encodedUrl = encodeURIComponent(SHARE_SITE_URL);
+
+    const menu = document.createElement('div');
+    menu.id = 'fn-share-menu';
+    menu.className = 'fn-share-menu';
+    menu.innerHTML = `
+        <a href="https://wa.me/?text=${encodedMessage}" target="_blank" rel="noopener">📱 واتساب</a>
+        <a href="https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(SHARE_TEXT)}" target="_blank" rel="noopener">✈️ تيليجرام</a>
+        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodedUrl}" target="_blank" rel="noopener">🐦 إكس (تويتر)</a>
+        <button type="button" id="fn-share-copy">📋 نسخ الرابط</button>
+    `;
+    document.body.appendChild(menu);
+
+    document.getElementById('fn-share-copy').addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(SHARE_SITE_URL).then(() => {
+            const copyBtn = document.getElementById('fn-share-copy');
+            if (copyBtn) copyBtn.textContent = '✅ تم النسخ';
+        });
+    });
+
+    setTimeout(() => {
+        document.addEventListener('click', function closeMenu(e) {
+            if (!menu.contains(e.target) && e.target !== anchorBtn) {
+                menu.remove();
+                document.removeEventListener('click', closeMenu);
+            }
+        });
+    }, 0);
 }

@@ -686,6 +686,63 @@ img {
     transform: translateY(-3px);
 }
 
+.fn-share-btn {
+    right: 18px;
+    bottom: 78px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #ffffff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fn-share-btn:hover {
+    background: var(--gold-dark);
+    transform: translateY(-3px);
+}
+
+.fn-share-menu {
+    position: fixed;
+    bottom: 130px;
+    right: 18px;
+    z-index: 501;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 170px;
+}
+
+.fn-share-menu a,
+.fn-share-menu button {
+    display: block;
+    text-align: right;
+    background: none;
+    border: none;
+    color: var(--text);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.fn-share-menu a:hover,
+.fn-share-menu button:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
 @media (max-width: 480px) {
     .fn-back-btn .fn-float-label {
         display: none;
@@ -707,6 +764,18 @@ img {
         right: 12px;
         width: 42px;
         height: 42px;
+    }
+
+    .fn-share-btn {
+        right: 12px;
+        bottom: 64px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .fn-share-menu {
+        bottom: 112px;
+        right: 12px;
     }
 }
 
@@ -827,7 +896,7 @@ img {
 
 /* ========== دعم الطباعة ========== */
 @media print {
-    header, footer, .theme-toggle, .buttons, nav, .fn-float-btn {
+    header, footer, .theme-toggle, .buttons, nav, .fn-float-btn, .fn-share-menu {
         display: none;
     }
 
